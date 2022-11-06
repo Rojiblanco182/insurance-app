@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import SearchBox from "./searchbox";
+import getClientsData from "../../api/clients";
 
 export default function Clients() {
   const [clients, setClients] = useState([]);
@@ -8,12 +8,12 @@ export default function Clients() {
   const [userDetails, setUserDetails] = useState();
 
   useEffect(() => {
-    async function getClientsData() {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/clients`);
-      setClients(data.clients);
+    async function getClients() {
+      const clientsData = await getClientsData();
+      setClients(clientsData);
     }
 
-    getClientsData();
+    getClients();
   }, []);
 
   useEffect(() => {
