@@ -1,34 +1,57 @@
-import { useState } from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { useEffect, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import LoginIcon from '@mui/icons-material/Login';
+import Button from '@mui/material/Button';
 import ClientsByNameOrId from "../components/clientByNameOrId";
 import ClientByPolicy from "../components/clientsByPolicy";
 import PoliciesByUser from "../components/policiesByUser";
+import getClientsData from '../api/clients';
 
 export default function Main() {
+  const [users, setUsers] = useState([]);
+  const [username, setUsername] = useState();
   const [role, setRole] = useState();
 
-  const handleRoleChange = (event) => {
-    setRole(event.target.value);
-  };
+  const searchUser = () => {
+    if (!username) {
+      return;
+    }
+
+    const userFound = users.find(user => user.name === username);
+    setUsername(userFound?.name);
+    setRole(userFound?.role);
+  }
+
+  useEffect(() => {
+    async function getUsers() {
+      const usersData = await getClientsData();
+      setUsers(usersData);
+    }
+
+    getUsers();
+  }, []);
 
   return (
     <>
       <h1>Insurance App</h1>
-      <FormControl>
-        <FormLabel id="demo-controlled-radio-buttons-group" sx={{color: 'white'}}>Select your role</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-controlled-radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          onChange={(e) => handleRoleChange(e)}
-        >
-          <FormControlLabel value="user" control={<Radio sx={{ color: 'white' }} />} label="User" />
-          <FormControlLabel value="admin" control={<Radio sx={{ color: 'white' }} />} label="Admin" />
-        </RadioGroup>
-      </FormControl>
+
+      {!role && 
+        <>
+          <TextField
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            startIcon={<LoginIcon />}
+            sx={{ height: '21px' }}
+            onClick={() => searchUser()}
+          />
+        </>
+      }
+      <br/>
 
       {role && <ClientsByNameOrId />}
 
