@@ -3,7 +3,7 @@ import SearchBox from "./searchbox";
 import getPoliciesData from "../../api/policies";
 import getClientsData from "../../api/clients";
 
-export default function Policies() {
+export default function PoliciesByUser() {
   const [policies, setPolicies] = useState([]);
   const [clients, setClients] = useState([]);
   const [userToSearch, setUserToSearch] = useState();
@@ -21,7 +21,7 @@ export default function Policies() {
   }, []);
 
   useEffect(() => {
-    if (!policies.length || !userToSearch) {
+    if (!policies.length || !clients.length || !userToSearch) {
       setPoliciesByUser(null);
       return;
     }
@@ -34,13 +34,14 @@ export default function Policies() {
   return (
     <>
       <SearchBox setUserToSearch={setUserToSearch} />
-      {policiesByUser && policiesByUser.map((policy) => {
+      <br />
+      {policiesByUser && policiesByUser.map((policy, idx) => {
         return (
-          <>
+          <div key={`policy-${idx}`}>
             <span>Amount insured: {policy.amountInsured}$</span>
             <span>Policy ID: {policy.id}</span>
             <hr style={{width:'100%', textAlign:'left', marginLeft:'0'}} />
-          </>
+          </div>
         )
       })
       }

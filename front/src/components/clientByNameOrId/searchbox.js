@@ -16,7 +16,7 @@ export default function SearchBox({ setUserToSearch }) {
   return (
     <>
       <div className="searchBox">
-        <label htmlFor="searchBox">Search user by name or Id: </label>
+        <label htmlFor="searchBox">Search user by name or ID: </label>
         <input
           type="text"
           id="searchBox"

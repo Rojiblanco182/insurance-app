@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SearchBox from "./searchbox";
 import getClientsData from "../../api/clients";
 
-export default function Clients() {
+export default function ClientByNameOrId() {
   const [clients, setClients] = useState([]);
   const [userToSearch, setUserToSearch] = useState();
   const [userDetails, setUserDetails] = useState();
