@@ -15,10 +15,11 @@ export default function SearchBox({ setUserToSearch }) {
 
   return (
     <>
-      <div className="searchBox">
+      <div>
         <label htmlFor="searchBox">Search policies by user name: </label>
         <input
           type="text"
+          className="search-box"
           id="searchBox"
           onChange={(e) => setUserInput(e.target.value)}
         />

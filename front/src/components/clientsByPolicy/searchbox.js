@@ -19,6 +19,7 @@ export default function SearchBox({ setPolicyToSearch }) {
         <label htmlFor="searchBox">Search user by policy ID: </label>
         <input
           type="text"
+          className="search-box"
           id="searchBox"
           onChange={(e) => setUserInput(e.target.value)}
         />

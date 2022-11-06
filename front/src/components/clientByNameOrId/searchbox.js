@@ -19,6 +19,7 @@ export default function SearchBox({ setUserToSearch }) {
         <label htmlFor="searchBox">Search user by name or ID: </label>
         <input
           type="text"
+          className="search-box"
           id="searchBox"
           onChange={(e) => setUserInput(e.target.value)}
         />

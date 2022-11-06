@@ -38,8 +38,8 @@ export default function PoliciesByUser() {
       {policiesByUser && policiesByUser.map((policy, idx) => {
         return (
           <div key={`policy-${idx}`}>
-            <span>Amount insured: {policy.amountInsured}$</span>
-            <span>Policy ID: {policy.id}</span>
+            <p>Amount insured: {policy.amountInsured}$</p>
+            <p>Policy ID: {policy.id}</p>
             <hr style={{width:'100%', textAlign:'left', marginLeft:'0'}} />
           </div>
         )
